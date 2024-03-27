@@ -7,7 +7,74 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Odin Sign-up Form</h1>
-    <p>Hello</p>
+    <section class="profile">
+        <div class="logo">
+            <img src="assets/odin-lined.png" alt="White outlined version of the Odin logo">
+            <span>ODIN</span>
+        </div>
+        <div class="credit">
+            <span>Photo: Álvaro Serrano</span>
+        </div>
+    </section>
+    <section class="content">
+        <section class="introduction">
+            <h1>
+                Sign up to get started!
+            </h1>
+            <p>
+                This is not a real online service! You know you need something like this in your life to help you realize your deepest dreams. Sign up now to get started.
+            </p>
+            <p>
+                <b>You know you want to!</b>
+            </p>
+        </section>
+        <section class="form">
+            <form>
+                <section class="form-controls">
+                    <h2>Please enter your information</h2>
+                    <div class="input-fields">
+                        <label for="first-name" aria-label="First name">
+                            <span>First name</span>
+                            <input type="text" name="first-name" id="first-name" required>
+                            <span></span>
+                        </label>
+                        <label for="last-name" aria-label="Last name">
+                            <span>Last name</span>
+                            <input type="text" name="last-name" id="last-name" required>
+                            <span></span>
+                        </label>
+                        <label for="email" aria-label="Email">
+                            <span>Email</span>
+                            <input type="email" name="email" id="email" required>
+                            <span></span>
+                        </label>
+                        <label for="phone" aria-label="Phone number">
+                            <span>Phone number</span>
+                            <input type="tel" name="phone" id="phone" required>
+                            <span></span>
+                        </label>
+                        <label for="password" aria-label="Password">
+                            <span>Password</span>
+                            <input type="password" name="password" id="password" required>
+                            <span></span>
+                        </label>
+                        <label for="password-confirm" aria-label="Confirm password">
+                            <span>Confirm password</span>
+                            <input type="password" name="password-confirm" id="password-confirm" required>
+                            <span></span>
+                        </label>
+                    </div>
+                </section>
+                <section class="submit">
+                    <button type="submit">Create account</button>
+                </section>
+            </form>
+        </section>
+        <section class="login">
+            <p>
+                Already have an account? <a href="#">Log in</a>
+            </p>
+        </section>
+    </section>    
 </body>
 </html>
