@@ -11,6 +11,7 @@
     --accent-color: rgb(40, 55, 58);
     --accent-hover: rgb(94, 86, 71);
     --background-color: rgba(212, 205, 197);
+    --background-color-form: rgb(241, 236, 232);
     --text-color: rbg(0, 0, 0);
 
     color: var(--text-color);
@@ -32,8 +33,15 @@ body {
 }
 
 .credit {
+    bottom: 8px;
+    color: rgba(255, 255, 255, .5);
     font-size: 12px;
-    margin-top: max(80px, 10vw);
+    /* margin-top: max(80px, 10vw); */
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    width: 200px;
     text-align: center;
 }
 
@@ -42,9 +50,9 @@ body {
 }
 
 .form-controls {
-    background-color: white;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, .2);
-    padding: 20px;
+    background-color: var(--background-color-form);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .1);
+    padding: 20px var(--edge-padding);
 }
 
 h1 {
@@ -67,13 +75,12 @@ html {
 }
 
 .introduction {
-    padding: 0 20px;
+    padding: 0 var(--edge-padding);
 }
 
 .input-fields {
     --error-color: rgba(199, 15, 15, 0.925);
 
-    background-color: white;
     display: flex;
     flex-direction: column;
 }
@@ -145,27 +152,31 @@ html {
     align-items: center;
     background-color: rgba(0, 0, 0, .6);
     display: flex;
+    flex: 1;
+    height: 250px;
     justify-content: center;
     padding: 20px 0;
 }
 
 .logo img {
-    width: min(50px, 100%)
+    width: min(70px, 100%);
+    height: auto;
 }
 
 .logo span {
     color: white;
     font-family: Norse-Bold;
-    font-size: 3rem;
+    font-size: 4rem;
 }
 
 .profile {
     background: url("./assets/alvaro-serrano-hjwKMkehBco-unsplash.jpg") no-repeat center;
     background-size: cover;
     display: flex;
-    flex-direction: column;
-    padding-top: max(40px, 5vw);
-    padding-bottom: 20px;
+    flex-direction: row;
+    position: relative;
+    /* padding-top: max(40px, 5vw);
+    padding-bottom: 20px; */
 }
 
 .submit {
@@ -191,4 +202,48 @@ html {
     box-shadow:inset 0px 0px 0px 3px rgba(0, 0, 0, .1);
     -webkit-box-shadow:inset 0px 0px 0px 3px rgba(0, 0, 0, .1);
     -moz-box-shadow:inset 0px 0px 0px 3px rgba(0, 0, 0, .1)
+}
+
+@media screen and (min-width: 700px) {
+    body {
+        --edge-padding: 40px;
+    }
+    .input-fields {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 70ch;
+    }
+
+    .input-fields input {
+        width: calc(100% - 19px);
+    }
+
+    .input-fields label {
+        width: 46%;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+        --edge-padding: 40px;
+
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .content {
+        flex: 2;
+        margin-top: 80px;
+    }
+
+    .logo {
+        height: unset;
+    }
+
+    .profile {
+        flex: 1;
+        justify-content: space-between;
+        /* padding-top: 105px; */
+    }
 }
