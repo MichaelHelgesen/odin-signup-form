@@ -80,9 +80,20 @@ html {
 
 .input-fields {
     --error-color: rgba(199, 15, 15, 0.925);
-
+    --focus-color: rgba(214, 220, 255, 0.925);
+    --valid-color: rgb(194, 248, 201);
     display: flex;
     flex-direction: column;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+{
+  border: none;
+  -webkit-text-fill-color: inherit;
+  -webkit-box-shadow: 0 0 0px 1000px var(--valid-color) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .input-fields input {
@@ -96,14 +107,21 @@ html {
 
 .input-fields input:invalid {
     border: 1px solid var(--error-color);
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
+.input-fields input:focus-visible {
+    background-color: var(--focus-color);
+    -webkit-box-shadow: 0 0 0px 1000px var(--focus-color) inset;
+}
+    
 .input-fields input:invalid + span::after {
     content: "🗙";
 }
 
 .input-fields input:valid {
-    border: 1px solid var(--accent-color);
+    border: 1px solid green;
+    background-color: var(--valid-color);
 }
 
 .input-fields input:valid + span::after {
