@@ -86,7 +86,7 @@ html {
     flex-direction: column;
 }
 
-input:-webkit-autofill,
+/* input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus
 {
@@ -94,7 +94,7 @@ input:-webkit-autofill:focus
   -webkit-text-fill-color: inherit;
   -webkit-box-shadow: 0 0 0px 1000px var(--valid-color) inset;
   transition: background-color 5000s ease-in-out 0s;
-}
+} */
 
 .input-fields input {
     border-radius: 3px;
@@ -122,6 +122,7 @@ input:-webkit-autofill:focus
 .input-fields input:valid {
     border: 1px solid green;
     background-color: var(--valid-color);
+    -webkit-box-shadow: 0 0 0px 1000px var(--valid-color) inset;
 }
 
 .input-fields input:valid + span::after {

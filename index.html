@@ -34,33 +34,33 @@
                 <section class="form-controls">
                     <h2>Please enter your information</h2>
                     <div class="input-fields">
-                        <label for="first-name" aria-label="First name">
-                            <span>First name</span>
+                        <label for="first-name" aria-label="First name" aria-required="true">
+                            <span>First name *</span>
                             <input type="text" name="first-name" id="first-name" required autocomplete="name">
                             <span></span>
                         </label>
                         <label for="last-name" aria-label="Last name">
-                            <span>Last name</span>
+                            <span>Last name *</span>
                             <input type="text" name="last-name" id="last-name" required autocomplete="family-name"> 
                             <span></span>
                         </label>
                         <label for="email" aria-label="Email">
-                            <span>Email</span>
+                            <span>Email *</span>
                             <input type="email" name="email" id="email" required autocomplete="email">
                             <span></span>
                         </label>
                         <label for="phone" aria-label="Phone number">
-                            <span>Phone number</span>
+                            <span>Phone number *</span>
                             <input type="tel" name="phone" id="phone" required autocomplete="tel">
                             <span></span>
                         </label>
                         <label for="password" aria-label="Password">
-                            <span>Password</span>
-                            <input type="password" minlength="5", maxlength="15", name="password" id="password" required>
+                            <span>Password *</span>
+                            <input type="password" name="password" id="password" minlength="8" maxlength="15" required>
                             <span></span>
                         </label>
                         <label for="password-confirm" aria-label="Confirm password">
-                            <span>Confirm password</span>
+                            <span>Confirm password *</span>
                             <input type="password" name="password-confirm" id="password-confirm" required>
                             <span></span><span class="password-error-msg"></span>
                         </label>
