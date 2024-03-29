@@ -114,6 +114,12 @@ input:-webkit-autofill:focus
     background-color: var(--focus-color);
     -webkit-box-shadow: 0 0 0px 1000px var(--focus-color) inset;
 }
+
+.input-fields .password-msg {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
     
 .input-fields input:invalid + span::after {
     content: "🗙";
@@ -135,14 +141,14 @@ input:-webkit-autofill:focus
     padding-left: 3px;
 }
 
-.input-fields label span:first-child {
+/* .input-fields label span:first-child {
     display: block;
     font-size: .9rem;
     font-weight:500;
     margin-bottom: 3px;
     margin-top: 8px;
     text-transform: uppercase;
-}
+} */
 
 .introduction p {
     font-size: 1.1rem;
@@ -196,6 +202,19 @@ input:-webkit-autofill:focus
     position: relative;
     /* padding-top: max(40px, 5vw);
     padding-bottom: 20px; */
+}
+
+.password-msg span {
+    font-size: .82rem;
+    width: 48%;
+}
+
+.password-msg span.green {
+    color:green;
+}
+
+.password-msg span.red {
+    color:var(--error-color);
 }
 
 .submit {

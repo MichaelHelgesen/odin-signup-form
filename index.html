@@ -36,28 +36,34 @@
                     <div class="input-fields">
                         <label for="first-name" aria-label="First name" aria-required="true">
                             <span>First name *</span>
-                            <input type="text" name="first-name" id="first-name" required autocomplete="name">
+                            <input type="text" title="Please enter your first name" name="first-name" id="first-name" required autocomplete="name">
                             <span></span>
                         </label>
                         <label for="last-name" aria-label="Last name">
                             <span>Last name *</span>
-                            <input type="text" name="last-name" id="last-name" required autocomplete="family-name"> 
+                            <input type="text" title="Please enter  your last name" name="last-name" id="last-name" required autocomplete="family-name"> 
                             <span></span>
                         </label>
                         <label for="email" aria-label="Email">
                             <span>Email *</span>
-                            <input type="email" name="email" id="email" required autocomplete="email">
+                            <input type="email" title="PLease enter a valid e-mail address" name="email" id="email" required autocomplete="email">
                             <span></span>
                         </label>
                         <label for="phone" aria-label="Phone number">
                             <span>Phone number *</span>
-                            <input type="tel" name="phone" id="phone" required autocomplete="tel">
+                            <input type="tel" name="phone" title="Please enter a phone number" id="phone" required autocomplete="tel">
                             <span></span>
                         </label>
                         <label for="password" aria-label="Password">
-                            <span>Password *</span>
-                            <input type="password" name="password" id="password" minlength="8" maxlength="15" required>
+                            <span>Password*</span>
+                            <input type="password" title="Enter a password with 8 to 16 characters including letters, numbers and symbols." placeholder="8 - 16 characters" name="password" id="password" minlength="8" maxlength="15" required>
                             <span></span>
+                            <span class="password-msg">
+                                <span class='psw-letters'>Letters(a-zA-Z): <span class="symbol red">🗙</span></span>
+                                <span class='psw-numbers'>Numbers(0-9): <span class="symbol red">🗙</span></span>
+                                <span class='psw-symbols'>Symbols(!+#&/()-): <span class="symbol red">🗙</span></span>
+                                <span class='psw-char'>Characters(8-16): <span class="symbol red">🗙</span></span>
+                            </span>
                         </label>
                         <label for="password-confirm" aria-label="Confirm password">
                             <span>Confirm password *</span>
