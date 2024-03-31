@@ -30,12 +30,12 @@ body {
 
 .confirmation {
     display: none;
-    font-family: Norse-Bold;
+    font-family: Norse-Bold, var(--system-ui);
     margin-top: 10px;
 }
 
 .confirmation h3 {
-    font-family: Norse-Bold;
+    font-family: Norse-Bold, var(--system-ui);
     font-size: 1.5rem;
 }
 
@@ -67,14 +67,14 @@ body {
 }
 
 h1 {
-    font-family: Norse-Bold;
+    font-family: Norse-Bold, var(--system-ui);
     font-size: clamp(2.8em, 5vw, 4rem);
     letter-spacing: -1px;
     line-height: 1.2em;
 }
 
 h2 {
-    font-family: Norse-Bold;
+    font-family: Norse-Bold, var(--system-ui);
     font-size: clamp(2em, 3.5vw, 3rem);
     letter-spacing: -1px;
     line-height: 1.2em;
@@ -192,7 +192,7 @@ html {
 
 .logo span {
     color: white;
-    font-family: Norse-Bold;
+    font-family: Norse-Bold, var(--system-ui);
     font-size: 4rem;
 }
 
