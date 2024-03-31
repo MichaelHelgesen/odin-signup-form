@@ -2,77 +2,54 @@ const passwordFields = document.querySelectorAll("input[type=password]");
 const submitButton = document.querySelector("button");
 const allInputFields = Array.from(document.querySelectorAll("input"));
 const form = document.querySelector("form");
-const passwordHelpSpan = document.querySelector(".password-msg")
-const passwordHelpSpanLetters = document.querySelector(".psw-letters .symbol")
-const passwordHelpSpanNumbers = document.querySelector(".psw-numbers .symbol")
-const passwordHelpSpanSymbols = document.querySelector(".psw-symbols .symbol")
-const passwordHelpSpanChar = document.querySelector(".psw-char .symbol")
-let password = ""
-let passwordConfirm = ""
-const patternLetters = /[a-zA-Z]/
-const patternNumbers = /[0-9]/
-const patternSymbol = /[!+#&/()-]/
-let passwordHelpLetters = "<span class='psw psw-letters red'>Letters(a-zA-Z): <span>🗙</span></span>"
-let passwordHelpNumbers = "<span class='psw psw-numbers red'>Numbers(0-9): <span>🗙</span></span>"
-let passwordHelpSymbol = "<span class='psw psw-symbols red'>Symbols(!+#&/()-): <span>🗙</span></span>"
-let passwordHelpRange = "<span class='psw psw-char red'>Characters(8-16): <span>🗙</span></span>"
+const passWordConfirmInput = document.getElementById("password-confirm");
+const confirmationDiv = document.querySelector(".confirmation");
+const passwordHelpSpan = document.querySelector(".password-msg");
+const passwordHelpSpanLetters = document.querySelector(".psw-letters .symbol");
+const passwordHelpSpanNumbers = document.querySelector(".psw-numbers .symbol");
+const passwordHelpSpanSymbols = document.querySelector(".psw-symbols .symbol");
+const passwordHelpSpanChar = document.querySelector(".psw-char .symbol");
+const passwordConfirmHelpSpan = document.querySelector(".psw-match .symbol");
+let password = "";
+let passwordConfirm = "";
+const patternLetters = /[a-zA-Z]/;
+const patternNumbers = /[0-9]/;
+const patternSymbol = /[!+#&/()-]/;
 
-
-const checkValidPasswordKey = function (keypress) {
-    if (keypress.key.length === 1) {
-        if (patternLetters.test(keypress.key)
-        ) {
-            console.log("Letter", patternLetters.test(keypress.key))
-            passwordHelpLetters = "<span class='psw psw-letters green'>Letters(a-zA-Z): <span>✓</span></span>"
-            console.log(passwordHelpSpanLetters)
-            if (keypress.type === "keyup") {
-                passwordHelpSpanLetters.innerText = "✓"
-                passwordHelpSpanLetters.classList.remove("red")
-            }
-            return true
-        }
-        if (patternNumbers.test(keypress.key)
-        ) {
-            console.log("Number", patternNumbers.test(keypress.key))
-            if (keypress.type === "keyup") {
-                passwordHelpSpanNumbers.innerText = "✓"
-                passwordHelpSpanNumbers.classList.remove("red")
-            }
-            //passwordHelpNumbers = "<span class='psw psw-numbers green'>Numbers(0-9): <span>✓</span></span>"
-            return true
-        }
-        if (patternSymbol.test(keypress.key)
-        ) {
-            console.log("Symbol", patternSymbol.test(keypress.key))
-            if (keypress.type === "keyup") {
-                passwordHelpSpanSymbols.innerText = "✓"
-                passwordHelpSpanSymbols.classList.remove("red")
-            }
-            //passwordHelpSymbol = "<span class='psw psw-symbols green'>Symbols(!+#&/()-): <span>✓</span></span>"
-            return true
-        }
+const setHelperTextSymbol = function (span, condition) {
+    if (condition) {
+        span.innerText = "✓"
+        span.classList.remove("red")
+    } else {
+        span.innerText = "🗙"
+        span.classList.add("red")
     }
-
+}
+const determineIfValidKeypress = function (keypress) {
+    if (keypress.key.length === 1) {
+        if (keypress.type === "keyup") {
+            if (patternLetters.test(keypress.key)) {
+                setHelperTextSymbol(passwordHelpSpanLetters, true)
+            }
+            if (patternNumbers.test(keypress.key)) {
+                setHelperTextSymbol(passwordHelpSpanNumbers, true)
+            }
+            if (patternSymbol.test(keypress.key)) {
+                setHelperTextSymbol(passwordHelpSpanSymbols, true)
+            }
+        }
+        return true
+    }
     if (
         keypress.keyCode >= 37 && keypress.keyCode <= 40 || // Arrow keys
         keypress.keyCode === 8 || // backspace
         keypress.keyCode === 9 ||// tab
-        keypress.keyCode === 13 // enter
-        //keypress.keyCode === 189 // -
+        keypress.keyCode === 13 ||// enter
+        keypress.keyCode === 35 || // End
+        keypress.keyCode === 36 || // Home 
+        keypress.keyCode === 46  // Del 
     ) {
         return true
-    }
-    if (!keypress.shiftKey) {
-        if (
-            keypress.keyCode === 35 || // End
-            keypress.keyCode === 36 || // Home 
-            keypress.keyCode === 46  // Del 
-            /* keypress.keyCode === 107 || // Numpad /
-            keypress.keyCode === 109 || // Numpad -
-            keypress.keyCode === 111 // Numpad + */
-        ) {
-            return true
-        }
     }
 }
 
@@ -81,64 +58,59 @@ const checkValidPasswordString = function (passwordString) {
 }
 
 const inputSave = function (e) {
-    console.log(e)
-    if (checkValidPasswordKey(e)) {
-        console.log("VALID")
-
+    if (determineIfValidKeypress(e)) {
         if (e.target.id === "password") {
             password = e.target.value;
-
             if (e.type === "keyup") {
                 if (!patternLetters.test(password)
                 ) {
-                    passwordHelpSpanLetters.innerText = "🗙"
-                    passwordHelpSpanLetters.classList.add("red")
+                    setHelperTextSymbol(passwordHelpSpanLetters, false)
                 }
                 if (!patternNumbers.test(password)
                 ) {
-                    passwordHelpSpanNumbers.innerText = "🗙"
-                    passwordHelpSpanNumbers.classList.add("red")
+                    setHelperTextSymbol(passwordHelpSpanNumbers, false)
                 }
                 if (!patternSymbol.test(password)
                 ) {
-                    passwordHelpSpanSymbols.innerText = "🗙"
-                    passwordHelpSpanSymbols.classList.add("red")
+                    setHelperTextSymbol(passwordHelpSpanSymbols, false)
                 }
-                //passwordHelpSpan.innerHTML = passwordHelpLetters + passwordHelpNumbers + passwordHelpSymbol + passwordHelpRange
-                console.log(password.length)
+                // Check #password-confirm on change to #password
+                if (password && password == passwordConfirm) {
+                    passWordConfirmInput.setCustomValidity("")
+                    setHelperTextSymbol(passwordConfirmHelpSpan, true)
+                } else {
+                    passWordConfirmInput.setCustomValidity("Please match your password")
+                    setHelperTextSymbol(passwordConfirmHelpSpan, false)
+                }
                 if (password.length >= 8) {
-                    console.log("more than six")
-                    //passwordHelpRange = "<span class='psw psw-char green'>Characters(8-16): <span>✓</span></span>"
-                    passwordHelpSpanChar.innerText = "✓"
-                    passwordHelpSpanChar.classList.remove("red")
+                    setHelperTextSymbol(passwordHelpSpanChar, true)
                     if (checkValidPasswordString(password)) {
                         e.target.setCustomValidity("")
                     } else {
                         e.target.setCustomValidity("Please use the correct formatting")
                     }
                 } else {
-                    passwordHelpSpanChar.innerText = "🗙"
-                    passwordHelpSpanChar.classList.add("red")
-                    //passwordHelpRange = "<span class='psw psw-char red'>Characters(8-16): <span>🗙</span></span>"
-                    //passwordHelpSpan.innerHTML = passwordHelpLetters + passwordHelpNumbers + passwordHelpSymbol + passwordHelpRange
-
+                    setHelperTextSymbol(passwordHelpSpanChar, false)
                 }
             }
         } else {
-            if (e.key.length === 1 || e.keyCode == 8 || e.keyCode == 46) {
-                e.target.setCustomValidity("")
-            }
             passwordConfirm = e.target.value;
+            if (e.type === "keyup") {
+                if (password && password == passwordConfirm) {
+                    e.target.setCustomValidity("")
+                    setHelperTextSymbol(passwordConfirmHelpSpan, true)
+                } else {
+                    e.target.setCustomValidity("Please match your password")
+                    setHelperTextSymbol(passwordConfirmHelpSpan, false)
+                }
+            }
         }
     } else {
-        console.log("forbidden")
         e.preventDefault();
-        //document.querySelector(".password-error-msg").textContent = "error"
     }
-    //console.log(e)
 }
 
-const checkMatchingPasswords = function (e) {
+const checkMatchingPasswords = function () {
     validFields = true;
     allInputFields.forEach(el => {
         if (!el.validity.valid) {
@@ -148,9 +120,9 @@ const checkMatchingPasswords = function (e) {
     });
     if (validFields) {
         if (password && password == passwordConfirm) {
-            console.log("same pass")
+            confirmationDiv.style.display = "block"
         } else {
-            document.getElementById("password-confirm").setCustomValidity("Password doesn't match")
+            passWordConfirmInput.setCustomValidity("Please match your password")
         }
     }
 }
