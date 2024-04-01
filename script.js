@@ -15,103 +15,104 @@ let passwordConfirm = "";
 const patternLetters = /[a-zA-Z]/;
 const patternNumbers = /[0-9]/;
 const patternSymbol = /[!+#&/()-]/;
-
 const setHelperTextSymbol = function (span, condition) {
     if (condition) {
-        span.innerText = "✓"
-        span.classList.remove("red")
-    } else {
-        span.innerText = "🗙"
-        span.classList.add("red")
+        span.innerText = "✓";
+        span.classList.remove("red");
     }
-}
+    else {
+        span.innerText = "🗙";
+        span.classList.add("red");
+    }
+};
 const determineIfValidKeypress = function (keypress) {
+    let validKey = false;
     if (keypress.key.length === 1) {
         if (keypress.type === "keyup") {
             if (patternLetters.test(keypress.key)) {
-                setHelperTextSymbol(passwordHelpSpanLetters, true)
+                setHelperTextSymbol(passwordHelpSpanLetters, true);
             }
             if (patternNumbers.test(keypress.key)) {
-                setHelperTextSymbol(passwordHelpSpanNumbers, true)
+                setHelperTextSymbol(passwordHelpSpanNumbers, true);
             }
             if (patternSymbol.test(keypress.key)) {
-                setHelperTextSymbol(passwordHelpSpanSymbols, true)
+                setHelperTextSymbol(passwordHelpSpanSymbols, true);
             }
         }
-        return true
+        validKey = true;
     }
-    if (
-        keypress.keyCode >= 37 && keypress.keyCode <= 40 || // Arrow keys
+    if (keypress.keyCode >= 37 && keypress.keyCode <= 40 || // Arrow keys
         keypress.keyCode === 8 || // backspace
-        keypress.keyCode === 9 ||// tab
-        keypress.keyCode === 13 ||// enter
+        keypress.keyCode === 9 || // tab
+        keypress.keyCode === 13 || // enter
         keypress.keyCode === 35 || // End
         keypress.keyCode === 36 || // Home 
-        keypress.keyCode === 46  // Del 
+        keypress.keyCode === 46 // Del 
     ) {
-        return true
+        validKey = true;
     }
-}
-
+    return validKey;
+};
 const checkValidPasswordString = function (passwordString) {
-    return patternLetters.test(passwordString) && patternNumbers.test(passwordString) && patternSymbol.test(passwordString)
-}
-
-const inputSave = function (e) {
-    if (determineIfValidKeypress(e)) {
-        if (e.target.id === "password") {
-            password = e.target.value;
-            if (e.type === "keyup") {
-                if (!patternLetters.test(password)
-                ) {
-                    setHelperTextSymbol(passwordHelpSpanLetters, false)
+    return patternLetters.test(passwordString) && patternNumbers.test(passwordString) && patternSymbol.test(passwordString);
+};
+const inputSave = function (event) {
+    if (determineIfValidKeypress(event)) {
+        if (event.target.id === "password") {
+            password = event.target.value;
+            if (event.type === "keyup") {
+                if (!patternLetters.test(password)) {
+                    setHelperTextSymbol(passwordHelpSpanLetters, false);
                 }
-                if (!patternNumbers.test(password)
-                ) {
-                    setHelperTextSymbol(passwordHelpSpanNumbers, false)
+                if (!patternNumbers.test(password)) {
+                    setHelperTextSymbol(passwordHelpSpanNumbers, false);
                 }
-                if (!patternSymbol.test(password)
-                ) {
-                    setHelperTextSymbol(passwordHelpSpanSymbols, false)
+                if (!patternSymbol.test(password)) {
+                    setHelperTextSymbol(passwordHelpSpanSymbols, false);
                 }
                 // Check #password-confirm on change to #password
                 if (password && password == passwordConfirm) {
-                    passWordConfirmInput.setCustomValidity("")
-                    setHelperTextSymbol(passwordConfirmHelpSpan, true)
-                } else {
-                    passWordConfirmInput.setCustomValidity("Please match your password")
-                    setHelperTextSymbol(passwordConfirmHelpSpan, false)
+                    passWordConfirmInput.setCustomValidity("");
+                    setHelperTextSymbol(passwordConfirmHelpSpan, true);
+                }
+                else {
+                    passWordConfirmInput.setCustomValidity("Please match your password");
+                    setHelperTextSymbol(passwordConfirmHelpSpan, false);
                 }
                 if (password.length >= 8) {
-                    setHelperTextSymbol(passwordHelpSpanChar, true)
+                    setHelperTextSymbol(passwordHelpSpanChar, true);
                     if (checkValidPasswordString(password)) {
-                        e.target.setCustomValidity("")
-                    } else {
-                        e.target.setCustomValidity("Please use the correct formatting")
+                        event.target.setCustomValidity("");
                     }
-                } else {
-                    setHelperTextSymbol(passwordHelpSpanChar, false)
+                    else {
+                        event.target.setCustomValidity("Please use the correct formatting");
+                    }
                 }
-            }
-        } else {
-            passwordConfirm = e.target.value;
-            if (e.type === "keyup") {
-                if (password && password == passwordConfirm) {
-                    e.target.setCustomValidity("")
-                    setHelperTextSymbol(passwordConfirmHelpSpan, true)
-                } else {
-                    e.target.setCustomValidity("Please match your password")
-                    setHelperTextSymbol(passwordConfirmHelpSpan, false)
+                else {
+                    setHelperTextSymbol(passwordHelpSpanChar, false);
                 }
             }
         }
-    } else {
-        e.preventDefault();
+        else {
+            passwordConfirm = event.target.value;
+            if (event.type === "keyup") {
+                if (password && password == passwordConfirm) {
+                    event.target.setCustomValidity("");
+                    setHelperTextSymbol(passwordConfirmHelpSpan, true);
+                }
+                else {
+                    event.target.setCustomValidity("Please match your password");
+                    setHelperTextSymbol(passwordConfirmHelpSpan, false);
+                }
+            }
+        }
     }
-}
-
+    else {
+        event.preventDefault();
+    }
+};
 const checkMatchingPasswords = function () {
-    validFields = true;
+    let validFields = true;
     allInputFields.forEach(el => {
         if (!el.validity.valid) {
             validFields = false;
@@ -120,13 +121,14 @@ const checkMatchingPasswords = function () {
     });
     if (validFields) {
         if (password && password == passwordConfirm) {
-            confirmationDiv.style.display = "block"
-        } else {
-            passWordConfirmInput.setCustomValidity("Please match your password")
+            confirmationDiv.style.display = "block";
+        }
+        else {
+            passWordConfirmInput.setCustomValidity("Please match your password");
         }
     }
-}
-passwordFields.forEach(input => input.addEventListener("keydown", inputSave))
-passwordFields.forEach(input => input.addEventListener("keyup", inputSave))
-submitButton.addEventListener("click", checkMatchingPasswords)
-form.addEventListener("submit", (ev) => ev.preventDefault())
+};
+passwordFields.forEach(input => input.addEventListener("keydown", inputSave));
+passwordFields.forEach(input => input.addEventListener("keyup", inputSave));
+submitButton.addEventListener("click", checkMatchingPasswords);
+form.addEventListener("submit", (ev) => ev.preventDefault());
