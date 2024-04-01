@@ -1,6 +1,6 @@
-const passwordFields: NodeListOf<HTMLFormElement> = document.querySelectorAll("input[type=password]");
-const submitButton: HTMLButtonElement = document.querySelector("button")!;
-const allInputFields = Array.from(document.querySelectorAll("input"));
+const passwordFields = document.querySelectorAll("input[type=password]") as NodeListOf<HTMLFormElement>;
+const submitButton = document.querySelector("button") as HTMLButtonElement;
+const allInputFields = Array.from(document.querySelectorAll("input")) as Array<HTMLInputElement>;
 const form = document.querySelector("form") as HTMLFormElement;
 const passWordConfirmInput = document.getElementById("password-confirm") as HTMLInputElement;
 const confirmationDiv = document.querySelector(".confirmation") as HTMLDivElement;
@@ -59,10 +59,10 @@ const checkValidPasswordString = function (passwordString: string): boolean {
     return patternLetters.test(passwordString) && patternNumbers.test(passwordString) && patternSymbol.test(passwordString)
 }
 
-const inputSave = function (event: any): void {
-    if (determineIfValidKeypress(event)) {
-        if (event.target.id === "password") {
-            password = event.target.value;
+const inputSave = function (event: Event): void {
+    if (determineIfValidKeypress(event as KeyboardEvent)) {
+        if ((event.target as HTMLInputElement).id === "password") {
+            password = (event.target as HTMLInputElement).value;
             if (event.type === "keyup") {
                 if (!patternLetters.test(password)
                 ) {
@@ -87,22 +87,22 @@ const inputSave = function (event: any): void {
                 if (password.length >= 8) {
                     setHelperTextSymbol(passwordHelpSpanChar, true)
                     if (checkValidPasswordString(password)) {
-                        event.target.setCustomValidity("")
+                        (event.target as HTMLInputElement).setCustomValidity("")
                     } else {
-                        event.target.setCustomValidity("Please use the correct formatting")
+                        (event.target as HTMLInputElement).setCustomValidity("Please use the correct formatting")
                     }
                 } else {
                     setHelperTextSymbol(passwordHelpSpanChar, false)
                 }
             }
         } else {
-            passwordConfirm = event.target.value;
+            passwordConfirm = (event.target as HTMLInputElement).value;
             if (event.type === "keyup") {
                 if (password && password == passwordConfirm) {
-                    event.target.setCustomValidity("")
+                    (event.target as HTMLInputElement).setCustomValidity("")
                     setHelperTextSymbol(passwordConfirmHelpSpan, true)
                 } else {
-                    event.target.setCustomValidity("Please match your password")
+                    (event.target as HTMLInputElement).setCustomValidity("Please match your password")
                     setHelperTextSymbol(passwordConfirmHelpSpan, false)
                 }
             }
